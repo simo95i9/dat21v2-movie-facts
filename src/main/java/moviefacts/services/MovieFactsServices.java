@@ -22,6 +22,12 @@ public class MovieFactsServices {
             <li><a href="/get-random">/get-random</a></li>
             <li><a href="/get-ten-sort-by-popularity">/get-ten-sort-by-popularity</a></li>
             <li><a href="/how-many-won-an-award">/how-many-won-an-award</a></li>
+            <li>
+                <a href="/longest?g1=Drama&g2=Western">/longest?g1=Drama&g2=Western</a><br>
+                <p>A Content-Security-Policy has also been configured. JavaScript injection a'la
+                <a href="/longest?g1=Drama&g2=<script>alert('hacked');</script>">/longest?g1=Drama&g2=&lt;script&gt;alert('hacked');&lt;/script&gt;</a>
+                shouldn't be possible</p>
+            </li>
         </ul>
         </p>
         """;
@@ -88,5 +94,35 @@ public class MovieFactsServices {
                 %s
                 </ul></p>
                 """.formatted(filteredMovies.size(), sb.toString());
+    }
+
+    public static String averageLongestGenre(Optional<String> g1, Optional<String> g2) {
+        if (g1.isEmpty() || g2.isEmpty()) {
+            return "You have to provide exactly two request parameters: 'g1' and 'g2'";
+        }
+
+        return
+            """
+            <p>
+            The '%s' genre has an average length of %.1f minutes.<br>
+            The '%s' genre has an average length of %.1f minutes.
+            </p>
+            """.formatted(
+                    g1.get(), averageLength(g1.get()),
+                    g2.get(), averageLength(g2.get())
+            );
+    }
+
+    private static Double averageLength(String genre) {
+        List<Movie> moviesInGenre = MovieFactsApplication.movies
+                .filter( m -> m.subject().equalsIgnoreCase(genre) );
+
+        if ( moviesInGenre.isEmpty() ) { return 0.0; }
+
+        Integer totalLength = moviesInGenre.stream()
+                .map(Movie::length)
+                .reduce(0, Integer::sum);
+
+        return totalLength.doubleValue() / moviesInGenre.size();
     }
 }

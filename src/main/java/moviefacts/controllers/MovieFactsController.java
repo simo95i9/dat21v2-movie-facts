@@ -2,7 +2,10 @@ package moviefacts.controllers;
 
 import moviefacts.services.MovieFactsServices;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 public class MovieFactsController {
@@ -38,14 +41,9 @@ public class MovieFactsController {
         return "Not implemented";
     }
 
-    @GetMapping("/longest?g1=’x’g2=’y’")
-    public String longest() {
-        return "Not implemented";
-    }
-
-    @GetMapping("/SQL")
-    public String sql() {
-        return  "Not implemented";
+    @GetMapping("/longest")
+    public String longest(@RequestParam Optional<String> g1, @RequestParam Optional<String> g2) {
+        return MovieFactsServices.averageLongestGenre(g1, g2);
     }
 
 
