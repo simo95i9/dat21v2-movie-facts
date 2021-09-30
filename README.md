@@ -8,5 +8,5 @@ or alternatively in [MovieFactsServices.java](/src/main/java/moviefacts/services
 
 
 ## Special Sauce
-When "rendering" a Movie-object we will also query the (TMDB API)[https://www.themoviedb.org].  
+When "rendering" a Movie-object we will also query the [TMDB API](https://www.themoviedb.org).  
 If possible a link to the movie poster will be included. You have to supply your own API key.
