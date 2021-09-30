@@ -2,9 +2,9 @@
 
 
 
-## Description
-Only the simple endpoints have been implemented.  
-A list of endpoints can be found on (http://localhost:8080/)[http://localhost:8080/]
+## Description 
+A list of implemented endpoints can be found on [http://localhost:8080/](http://localhost:8080/)  
+or alternatively in [MovieFactsServices.java](/src/main/java/moviefacts/services/MovieFactsServices.java#L10)
 
 
 ## Special Sauce
