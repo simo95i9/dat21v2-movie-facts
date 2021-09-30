@@ -24,9 +24,9 @@ public class MovieFactsServices {
             <li><a href="/how-many-won-an-award">/how-many-won-an-award</a></li>
             <li>
                 <a href="/longest?g1=Drama&g2=Western">/longest?g1=Drama&g2=Western</a><br>
-                <p>A Content-Security-Policy has also been configured. JavaScript injection a'la
+                A Content-Security-Policy has also been configured. JavaScript injection a'la
                 <a href="/longest?g1=Drama&g2=<script>alert('hacked');</script>">/longest?g1=Drama&g2=&lt;script&gt;alert('hacked');&lt;/script&gt;</a>
-                shouldn't be possible</p>
+                shouldn't be possible.
             </li>
         </ul>
         </p>
