@@ -1,5 +1,6 @@
 package moviefacts.models;
 
+import moviefacts.MovieFactsApplication;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
@@ -21,15 +22,13 @@ public record Movie(Year year, Integer length, String title, String subject, Int
 
     public Optional<URL> apiURL() {
         try {
-            System.out.println("YOU NEED TO SUPPLY YOUR OWN API KEY AND UNCOMMENT THE CODE");
-
             URL tmdb_movie_search = new DefaultUriBuilderFactory().builder()
                     .scheme("https")
                     .host("api.themoviedb.org")
                     .path("/3")
                     .path("/search")
                     .path("/movie")
-                    //.queryParam("api_key", "INCLUDE YOUR OWN API KEY HERE")
+                    .queryParam("api_key", MovieFactsApplication.env.get("MOVIE_FACTS_TMDB_API_KEY"))
                     .queryParam("query", this.title.replaceAll(" ", "+"))
                     .queryParam("year", this.year)
                     .build()
